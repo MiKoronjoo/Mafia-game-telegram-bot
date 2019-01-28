@@ -1,3 +1,7 @@
+import random
+from game.roles import *
+
+
 class Player:
     def __init__(self, name, id):
         self.name = name
@@ -15,8 +19,11 @@ class Manager:
     def __init__(self, game):
         self.game = game
 
-    def send_message(self, message):
-        pass
+    def send_public_message(self, message):
+        print(message)
+
+    def send_message(self, message, chat_id):
+        print('To %d: %s' % (chat_id, message))
 
 
 class Game:
@@ -25,3 +32,34 @@ class Game:
         self.group_id = group_id
         self.players = []
         self.manager = None
+
+    def join_player(self, player):
+        self.players.append(player)
+        self.manager.send_public_message(player.name + ' joined!')
+
+    def set_roles(self):
+        for player in self.players:
+            player.role = random.choice([Citizen, Doctor, Mafia])()
+            self.manager.send_message('You are ' + player.role.role, player.id)
+
+
+def main():
+    ###### TEST ######
+    game = Game('group_name', 123456)
+    manager = Manager(game)
+    game.manager = manager
+
+    manager.send_public_message('Join the game!')
+    game.join_player(Player('a', 11))
+    game.join_player(Player('b', 12))
+    game.join_player(Player('c', 13))
+    game.join_player(Player('d', 14))
+    game.join_player(Player('e', 15))
+
+    game.set_roles()
+
+    ##################
+
+
+if __name__ == '__main__':
+    main()
