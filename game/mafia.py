@@ -1,6 +1,15 @@
 import random
 from game.roles import *
 
+roles = {4: [Doctor, Mafia, Citizen, Citizen],
+         5: [Doctor, Mafia, Citizen, Citizen, Citizen],
+         6: [Doctor, Mafia, Mafia, Citizen, Citizen, Citizen],
+         7: [Doctor, Mafia, Mafia, Citizen, Citizen, Citizen, Citizen],
+         8: [Doctor, Mafia, Mafia, Mafia, Citizen, Citizen, Citizen, Citizen],
+         9: [Doctor, Mafia, Mafia, Mafia, Citizen, Citizen, Citizen, Citizen, Citizen],
+         10: [Doctor, Mafia, Mafia, Mafia, Citizen, Citizen, Citizen, Citizen, Citizen, Citizen],
+         11: [Doctor, Mafia, Mafia, Mafia, Mafia, Citizen, Citizen, Citizen, Citizen, Citizen, Citizen]}
+
 
 class Player:
     def __init__(self, name, id):
@@ -38,9 +47,12 @@ class Game:
         self.manager.send_public_message(player.name + ' joined!')
 
     def set_roles(self):
-        for player in self.players:
-            player.role = random.choice([Citizen, Doctor, Mafia])()
-            self.manager.send_message('You are ' + player.role.role, player.id)
+        no_role_players = list(range(len(self.players)))
+        for TheRole in roles[len(self.players)]:
+            i = random.choice(no_role_players)
+            self.players[i].role = TheRole()
+            self.manager.send_message('You are ' + self.players[i].role.role, self.players[i].id)
+            no_role_players.remove(i)
 
 
 def main():
