@@ -11,6 +11,12 @@ roles = {4: [Doctor, Mafia, Citizen, Citizen],
          11: [Doctor, Mafia, Mafia, Mafia, Mafia, Citizen, Citizen, Citizen, Citizen, Citizen, Citizen]}
 
 
+class Time(enum.Enum):
+    DAY = 'DAY'
+    VOTING = 'VOTING'
+    NIGHT = 'NIGHT'
+
+
 class Player:
     def __init__(self, name, id):
         self.name = name
@@ -41,6 +47,7 @@ class Game:
         self.group_id = group_id
         self.players = []
         self.manager = None
+        self.time = Time.DAY
 
     def join_player(self, player):
         self.players.append(player)
