@@ -8,61 +8,90 @@ class RoleType(enum.Enum):
 
 
 class Role:
-    pass
+    role = 'role'
 
 
 class Doctor(Role):
+    role = 'doctor'
+    role_type = RoleType.WHITE
+
     def __init__(self):
-        self.role_type = RoleType.WHITE
+        pass
 
     def save(self):
         pass
 
 
 class Citizen(Role):
+    role = 'citizen'
+    role_type = RoleType.WHITE
+
     def __init__(self):
-        self.role_type = RoleType.WHITE
+        pass
 
 
 class Mafia(Role):
+    role = 'mafia'
+    role_type = RoleType.BLACK
+
     def __init__(self):
-        self.role_type = RoleType.BLACK
+        pass
+
     def kill(self):
         pass
 
 
 class Don(Mafia):
-    pass
+    role = 'don'
 
 
 class Joker(Role):
+    role = 'joker'
+    role_type = RoleType.GREY
+
     def __init__(self):
-        self.role_type = RoleType.GREY
+        pass
 
 
 class Natasha(Role):
+    role = 'natasha'
+    role_type = RoleType.GREY
+
     def __init__(self):
-        self.role_type = RoleType.GREY
+        pass
+
     def mute(self):
         pass
 
 
 class Priest(Role):
+    role = 'priest'
+    role_type = RoleType.WHITE
+
     def __init__(self):
-        self.role_type = RoleType.WHITE
+        pass
+
     def unmute(self):
         pass
 
 
 class Thief(Role):
+    role = 'thief'
+    role_type = RoleType.GREY
+
     def __init__(self):
-        self.role_type = RoleType.GREY
+        pass
+
     def steal(self):
         pass
 
 
 class Sniper(Role):
+    role = 'sniper'
+    role_type = RoleType.WHITE
+
     def __init__(self):
-        self.role_type = RoleType.WHITE
+        pass
+
     def shoot(self):
         pass
